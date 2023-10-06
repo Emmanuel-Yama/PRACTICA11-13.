@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operaciones con Matrices</title>
+</head>
+<body>
+    <div>
+        <h2>Matriz:</h2>
+        <pre id="matriz-output"></pre>
+    </div>
+
+    <div>
+        <h2>Resultados:</h2>
+        <div id="resultados-output"></div>
+    </div>
+
+    <script>
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        let matriz = [];
+        for (let i = 0; i < 5; i++) {
+            let fila = [];
+            for (let j = 0; j < 10; j++) {
+                fila.push(getRandomInt(1, 100));
+            }
+            matriz.push(fila);
+        }
+
+        let A = [];
+        let B = [];
+        let C = new Array(10).fill(0);
+        let D = new Array(10).fill(0);
+
+        for (let i = 0; i < 5; i++) {
+            let filaSuma = 0;
+            for (let j = 0; j < 10; j++) {
+                filaSuma += matriz[i][j];
+                C[j] += matriz[i][j];
+            }
+            A.push(filaSuma);
+            B.push(filaSuma / 10);
+        }
+
+        for (let j = 0; j < 10; j++) {
+            D[j] = C[j] / 5;
+        }
+
+        // Mostrar la matriz
+        document.getElementById("matriz-output").innerText = matriz.map(row => row.join(" ")).join("\n");
+
+        // Mostrar los resultados
+        let resultadosHTML = "<ul>";
+        for (let i = 0; i < 5; i++) {
+            resultadosHTML += `<li>Fila ${i + 1}: Suma = ${A[i]}, Promedio = ${B[i]}</li>`;
+        }
+
+        for (let j = 0; j < 10; j++) {
+            resultadosHTML += `<li>Columna ${j + 1}: Suma = ${C[j]}, Promedio = ${D[j]}</li>`;
+        }
+        resultadosHTML += "</ul>";
+
+        document.getElementById("resultados-output").innerHTML = resultadosHTML;
+    </script>
+</body>
+</html>
